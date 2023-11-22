@@ -15,8 +15,9 @@ namespace Lifesteal;
 class Program
 {
     public static ILog Logger { get; private set; } = null!;
+    public static LifestealServer Server { get; private set; } = null!;
     private Configuration.ServerConfiguration ServerConfiguration { get; } = new();
-    private ServerListener<LifestealPlayer, LifestealServer> ServerListener { get; } = new();
+    private readonly ServerListener<LifestealPlayer, LifestealServer> LifeStealListener = new();
     
     private static void Main()
     {
@@ -24,7 +25,7 @@ class Program
         program.StartAPI();
     }
     
-    private static readonly JsonSerializerOptions JsonOptions = new JsonSerializerOptions
+    private static readonly JsonSerializerOptions JsonOptions = new()
     {
         Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
         WriteIndented = true,
@@ -38,7 +39,6 @@ class Program
             SetupLogger();
             LoadConfiguration();
             ValidateConfiguration();
-            PrepareDirectories();
             HookServer();
             StartServerListener();
             StartCommandHandler();
@@ -115,7 +115,7 @@ class Program
             .Bind(ServerConfiguration);
     }
 
-    public void ValidateConfiguration()
+    private void ValidateConfiguration()
     {
         List<ValidationResult> validationResults = new();
         IPAddress? ipAddress = null;
@@ -139,13 +139,10 @@ class Program
 
         ServerConfiguration.IPAddress = ipAddress;
     }
-
-    private void PrepareDirectories()
+    
+    private void HookServer()
     {
-        if (!Directory.Exists(ServerConfiguration.ConfigurationPath))
-        {
-            Directory.CreateDirectory(ServerConfiguration.ConfigurationPath);
-        }
+        LifeStealListener.OnCreatingGameServerInstance += InitializeServer;
     }
 
     private void StartServerListener()
@@ -155,23 +152,24 @@ class Program
         Logger.Info($"IP: {ServerConfiguration.IPAddress}");
         Logger.Info($"Port: {ServerConfiguration.Port}");
         
-        ServerListener.LogLevel = ServerConfiguration.LogLevel;
-        ServerListener.OnLog += ServerListener.OnLog;
-        ServerListener.Start(ServerConfiguration.IPAddress, ServerConfiguration.Port);
+        
+        LifeStealListener.OnLog += LifeStealListener.OnLog;
+        // TODO: Fix this not setting log level
+        // LifeStealListener.LogLevel = ServerConfiguration.LogLevel;
+        LifeStealListener.OnGameServerConnecting += OnGameServerConnecting;
+        LifeStealListener.Start(ServerConfiguration.IPAddress, ServerConfiguration.Port);
 
         Logger.Info($"Started server listener on {ServerConfiguration.IPAddress}:{ServerConfiguration.Port}");
     }
 
-    private void HookServer()
+    private static LifestealServer InitializeServer(IPAddress ip, ushort port)
     {
-        ServerListener.OnCreatingGameServerInstance += InitializeServer;
+        return new LifestealServer(ip, port);
     }
 
-    private LifestealServer InitializeServer(IPAddress ip, ushort port)
+    private static Task<bool> OnGameServerConnecting(IPAddress arg)
     {
-        LifestealServer server = new(ip, port);
-
-        return server;
+        return Task.FromResult(true);
     }
 
     private void StartCommandHandler()

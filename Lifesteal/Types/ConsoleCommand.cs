@@ -7,17 +7,17 @@ namespace Lifesteal.Types;
 public class ConsoleCommand : Attribute
 {
     public string Name { get; }
-    public string Description { get; }
+    private string Description { get; }
     public Action<string[]>? Action { get; set; }
-    public LifestealServer Server { get; set; }
-    public ILog Logger => Program.Logger;
+    protected LifestealServer Server { get; set; }
+    protected  ILog Logger => Program.Logger;
         
-    public ConsoleCommand(string name, string description, Action<string[]>? action = null)
+    protected ConsoleCommand(string name, string description, Action<string[]>? action = null)
     {
         Name = name;
         Description = description;
         Action = action;
-        Server = null!;
+        Server = Program.Server;
     }
         
     public override string ToString()

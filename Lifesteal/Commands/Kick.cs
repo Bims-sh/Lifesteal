@@ -14,13 +14,23 @@ public class Kick : ConsoleCommand
                 Logger.Error("You must provide a player name.");
                 return;
             }
-
-            string playerName = args[0];
-            LifestealPlayer? player = Server.AllPlayers.FirstOrDefault(p => p.Name == playerName);
+            
+            ulong playerSteamId;
+            try
+            {
+                playerSteamId = ulong.Parse(args[0]);
+            }
+            catch (Exception)
+            {
+                Logger.Error($"Invalid SteamId \"{args[0]}\".");
+                return;
+            }
+            
+            LifestealPlayer? player = Server.AllPlayers.FirstOrDefault(p => p.SteamID == playerSteamId);
             
             if (player == null)
             {
-                Logger.Error($"Player {playerName} not found.");
+                Logger.Error($"Player with SteamId \"{playerSteamId}\" not found.");
                 return;
             }
             

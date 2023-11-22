@@ -6,11 +6,9 @@ namespace Lifesteal.API;
     
 public class LifestealServer : GameServer<LifestealPlayer>
 {
-    private ILog Logger;
-
     public LifestealServer(IPAddress ip, ushort port)
     {
-        Logger = LogManager.GetLogger($"LifestealServer({ip}:{port})");
-        Logger.Debug("Initializing LifestealServer...");
+        var logger = LogManager.GetLogger($"LifestealServer({ip}:{port})");
+        logger.Debug("Initializing LifestealServer...");
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using Lifesteal.Commands;
+﻿using Lifesteal.Commands;
 using Lifesteal.Types;
 
 namespace Lifesteal.Util;
@@ -13,7 +12,13 @@ public class ConsoleCommandHandler
             string? command = Console.ReadLine();
             if (command is null)
             {
-                Program.Logger.Info("No std in stream available.");
+                Program.Logger.Warn("No std in stream available.");
+                return;
+            }
+            
+            if (Program.Server is null)
+            {
+                Program.Logger.Error("Server is not initialized.");
                 return;
             }
             
@@ -22,8 +27,14 @@ public class ConsoleCommandHandler
             
             string commandName = commandParts[0];
             
-            // run the command, for now just log it
-            Program.Logger.Info($"Running command: {command}");
+            ConsoleCommand? consoleCommand = CommandList.Commands.FirstOrDefault(c => c.Name == commandName);
+            if (consoleCommand == null)
+            {
+                Program.Logger.Error($"Command {commandName} not found.");
+                continue;
+            }
+            
+            consoleCommand.Action?.Invoke(commandParts.Skip(1).ToArray());
         }
     }
 }

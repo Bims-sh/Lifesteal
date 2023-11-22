@@ -17,8 +17,6 @@ public class Configuration
         
         [JsonIgnore]
         public IPAddress? IPAddress { get; set; }
-
-        public string ConfigurationPath { get; set; } = "./config";
         public LogLevel LogLevel { get; set; } = LogLevel.Players | LogLevel.GameServers | LogLevel.GameServerErrors | LogLevel.Sockets;
     }
 }
