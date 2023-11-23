@@ -5,7 +5,11 @@ namespace Lifesteal.Commands;
 
 public class PlayerList : ConsoleCommand
 {
-    public PlayerList() : base("playerlist", "Lists all players on the server.")
+    public PlayerList() : base(
+        name: "playerlist",
+        description:"Lists all players on the server.",
+        usage: "playerlist [page]"
+        )
     {
         Action = args =>
         {

@@ -5,7 +5,11 @@ namespace Lifesteal.Commands;
     
 public class Kick : ConsoleCommand
 {
-    public Kick() : base("kick", "Kicks a player from the server.")
+    public Kick() : base(
+        name: "kick",
+        description: "Kicks a player from the server.",
+        usage: "kick <steamId>"
+        )
     {
         Action = args =>
         {

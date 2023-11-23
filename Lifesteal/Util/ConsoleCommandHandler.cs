@@ -17,7 +17,7 @@ public class ConsoleCommandHandler
                 return;
             }
             
-            if (Program.Server is null)
+            if (Program.Server is null && command != "help")
             {
                 Program.Logger.Error("Server is not initialized.");
                 continue;
