@@ -9,7 +9,7 @@ public class ConsoleCommand : Attribute
     public string Name { get; }
     private string Description { get; }
     public Action<string[]>? Action { get; set; }
-    protected LifestealServer Server { get; set; }
+    protected GameServer<LifestealPlayer> Server { get; set; }
     protected  ILog Logger => Program.Logger;
         
     protected ConsoleCommand(string name, string description, Action<string[]>? action = null)

@@ -1,4 +1,5 @@
-﻿using Lifesteal.Commands;
+﻿using Lifesteal.API;
+using Lifesteal.Commands;
 using Lifesteal.Types;
 
 namespace Lifesteal.Util;
@@ -19,7 +20,7 @@ public class ConsoleCommandHandler
             if (Program.Server is null)
             {
                 Program.Logger.Error("Server is not initialized.");
-                return;
+                continue;
             }
             
             string[] commandParts = command.Split(" ", StringSplitOptions.RemoveEmptyEntries);

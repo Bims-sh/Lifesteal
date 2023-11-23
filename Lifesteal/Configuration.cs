@@ -10,10 +10,10 @@ public class Configuration
     internal class ServerConfiguration
     {
         [Required]
-        public string IP { get; set; } = "127.0.0.1";
+        public string IP { get; set; } = "0.0.0.0";
         
         [Required]
-        public int Port { get; set; } = 30000;
+        public int Port { get; set; } = 30001;
         
         [JsonIgnore]
         public IPAddress? IPAddress { get; set; }

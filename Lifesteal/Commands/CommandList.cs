@@ -6,6 +6,7 @@ public class CommandList
 {
     public static List<ConsoleCommand> Commands { get; } = new()
     {
-        new Kick()
+        new Kick(),
+        new PlayerList()
     };
 }
