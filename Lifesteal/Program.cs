@@ -147,6 +147,7 @@ internal class Program
         var listener = new ServerListener<LifestealPlayer, LifestealServer>();
         
         listener.OnCreatingGameServerInstance += InitializeServer;
+        listener.OnGameServerDisconnected = OnGameServerDisconnected;
         listener.LogLevel = ServerConfiguration.LogLevel;
         listener.OnLog += OnLog;
         listener.Start(ServerConfiguration.Port);
@@ -167,6 +168,19 @@ internal class Program
         Server = server;
         
         return server;
+    }
+    
+    private static void UnloadServer()
+    {
+        Server?.Dispose();
+        Server = null!;
+    }
+
+    private static async Task OnGameServerDisconnected(GameServer<LifestealPlayer> server)
+    {
+        Logger.Warn("Server disconnected. Unloading server...");
+        await Task.Delay(1000);
+        UnloadServer();
     }
 
     private void StartCommandHandler()
