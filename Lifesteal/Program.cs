@@ -41,7 +41,6 @@ internal class Program
             LoadConfiguration();
             ValidateConfiguration();
             StartServerListener();
-            StartCommandHandler();
         }
         catch (Exception ex)
         {
@@ -53,10 +52,19 @@ internal class Program
             {
                 Logger.Error($"Initialization error: {Environment.NewLine}{ex}");
             }
+            
+            // kill it with fire and dip out of here if we failed to initialize
             Environment.Exit(-1);
         }
-            
-        Thread.Sleep(Timeout.Infinite);
+
+        try
+        {
+            StartCommandHandler();
+        }
+        catch (Exception ex)
+        {
+            Logger.Error($"Command handler error: {Environment.NewLine}{ex}");
+        }
     } 
 
     private void SetupLogger()

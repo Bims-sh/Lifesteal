@@ -8,7 +8,7 @@ public class Kick : ConsoleCommand
     public Kick() : base(
         name: "kick",
         description: "Kicks a player from the server.",
-        usage: "kick <steamId>"
+        usage: "kick <steamId> [reason]"
         )
     {
         Action = args =>
@@ -38,7 +38,9 @@ public class Kick : ConsoleCommand
                 return;
             }
             
-            player.Kick();
+            var reason = args.Length > 1 ? string.Join(" ", args.Skip(1)) : "Kicked by admin.";
+            
+            player.Kick(reason);
         };
     }
 }
