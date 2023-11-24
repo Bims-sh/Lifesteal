@@ -17,13 +17,12 @@ internal class Program
 {
     public static ILog Logger { get; private set; } = null!;
     public static LifestealServer Server { get; private set; } = null!;
-    public Configuration.ServerConfiguration ServerConfiguration { get; } = new();
-    private ServerListener<LifestealPlayer, LifestealServer> LifeStealListener;
+    public static Configuration.ServerConfiguration ServerConfiguration { get; } = new();
     
     private static void Main()
     {
         Program program = new();
-        program.StartAPI();
+        program.StartApi();
     }
     
     private static readonly JsonSerializerOptions JsonOptions = new()
@@ -33,7 +32,7 @@ internal class Program
         AllowTrailingCommas = true
     };
 
-    private void StartAPI()
+    private void StartApi()
     {
         try
         {
@@ -151,8 +150,6 @@ internal class Program
         listener.LogLevel = ServerConfiguration.LogLevel;
         listener.OnLog += OnLog;
         listener.Start(ServerConfiguration.Port);
-        
-        LifeStealListener = listener;
 
         Logger.Info($"Started server listener on {ServerConfiguration.IPAddress}:{ServerConfiguration.Port}");
     }

@@ -14,6 +14,9 @@ public class Configuration
         
         [Required]
         public int Port { get; set; } = 30001;
+
+        [Required]
+        public string LoadingScreenText { get; set; } = "Lifesteal Gungame";
         
         [JsonIgnore]
         public IPAddress? IPAddress { get; set; }
