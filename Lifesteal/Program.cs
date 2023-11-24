@@ -18,6 +18,7 @@ internal class Program
     public static ILog Logger { get; private set; } = null!;
     public static LifestealServer Server { get; private set; } = null!;
     public static Configuration.ServerConfiguration ServerConfiguration { get; } = new();
+    public static ServerRoles LifeStealServerRoles = new();
     
     private static void Main()
     {
