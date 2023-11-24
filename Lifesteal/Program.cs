@@ -17,8 +17,8 @@ internal class Program
 {
     public static ILog Logger { get; private set; } = null!;
     public static LifestealServer Server { get; private set; } = null!;
-    public static Configuration.ServerConfiguration ServerConfiguration { get; } = new();
     public static ServerRoles LifeStealServerRoles = new();
+    public static Configuration.ServerConfiguration ServerConfiguration { get; } = new();
     
     private static void Main()
     {
@@ -45,7 +45,14 @@ internal class Program
         }
         catch (Exception ex)
         {
-            Logger.Error($"Initialization error: {ex}");
+            if (Logger == null)
+            {
+                Console.WriteLine("Failed to initialize logger" + Environment.NewLine + ex);
+            }
+            else
+            {
+                Logger.Error($"Initialization error: {Environment.NewLine}{ex}");
+            }
             Environment.Exit(-1);
         }
             
@@ -62,7 +69,7 @@ internal class Program
     <root>
     <level value=""INFO"" />
     <appender-ref ref=""ManagedColoredConsoleAppender"" />
-    <appender-ref ref=""ManagedFileAppender"" /> <!-- New line to reference the file appender -->
+    <appender-ref ref=""ManagedFileAppender"" />
     </root>
     <appender name=""ManagedColoredConsoleAppender"" type=""log4net.Appender.ManagedColoredConsoleAppender"">
     <layout type=""log4net.Layout.PatternLayout"">
@@ -78,7 +85,7 @@ internal class Program
     </mapping>
     </appender>
     <appender name=""ManagedFileAppender"" type=""log4net.Appender.FileAppender"">
-    <file value=""logs\LogFile.log"" /> <!-- Adjust the file path as needed -->
+    <file value=""logs\log.txt"" />
     <appendToFile value=""true"" />
     <layout type=""log4net.Layout.PatternLayout"">
         <conversionPattern value=""%date [%logger] %level - %message%newline"" />
@@ -97,8 +104,17 @@ internal class Program
             Console.WriteLine("Failed to load log4net.config" + Environment.NewLine + ex);
             throw;
         }
-
-        Logger = LogManager.GetLogger("Lifesteal");
+        
+        try 
+        {
+            Logger = LogManager.GetLogger("Lifesteal");
+            Logger.Info("Logger initialized.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Failed to initialize logger" + Environment.NewLine + ex);
+            throw;
+        }
     }
 
     private void LoadConfiguration()
