@@ -11,8 +11,7 @@ public class ChatRewrite : LifestealServer
     {
         if (msg.StartsWith("!")) return Task.FromResult(false);
 
-        var playerSteamId = player.SteamID;
-        PlayerRoles highestRole = player.GetHighestRole();
+        Enums.PlayerRoles highestRole = player.GetHighestRole();
         var prefix = player.GetPrefixForHighestRole(highestRole);
         var suffix = player.GetSuffixForHighestRole(highestRole);
 
