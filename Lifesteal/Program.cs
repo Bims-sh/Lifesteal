@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
@@ -194,7 +195,7 @@ internal class Program
     
     private static void UnloadServer()
     {
-        Server?.Dispose();
+        Server.Dispose();
         Server = null!;
     }
 

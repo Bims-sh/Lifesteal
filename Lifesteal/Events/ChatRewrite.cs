@@ -3,9 +3,9 @@ using Lifesteal.API;
 using Lifesteal.Enums;
 using Lifesteal.Interfaces;
 
-namespace Lifesteal.Modules;
+namespace Lifesteal.Events;
 
-public class ChatRewrite : LifestealServer
+public class ChatRewrite : Event
 {
     public override Task<bool> OnPlayerTypedMessage(LifestealPlayer player, ChatChannel channel, string msg)
     {
@@ -25,28 +25,28 @@ public class ChatRewrite : LifestealServer
         switch (channel)
         {
             case ChatChannel.TeamChat:
-                foreach (var teamPlayer in AllPlayers.Where(p => p.Team == player.Team))
+                foreach (var teamPlayer in Server.AllPlayers.Where(p => p.Team == player.Team))
                 {
                     var colorCodedName = teamPlayer.Team == player.Team
                         ? $"<color={IChatColorChannels.GoodGuys}>{player.Name}</color>"
                         : $"<color={IChatColorChannels.BadGuys}>{player.Name}</color>";
 
-                    var rewrittenMessage = $"{prefix}{player.Name}{suffix} [{team}]: {msg}";
+                    var rewrittenMessage = $"{prefix}{colorCodedName}{suffix} [{team}]: {msg}";
 
-                    SayToChat(rewrittenMessage, teamPlayer);
+                    Server.SayToChat(rewrittenMessage, teamPlayer);
                 }
 
                 return Task.FromResult(false);
             case ChatChannel.AllChat:
-                foreach (var teamPlayer in AllPlayers)
+                foreach (var teamPlayer in Server.AllPlayers)
                 {
                     var colorCodedName = teamPlayer.Team == player.Team
                         ? $"<color={IChatColorChannels.GoodGuys}>{player.Name}</color>"
                         : $"<color={IChatColorChannels.BadGuys}>{player.Name}</color>";
 
-                    var rewrittenMessage = $"{prefix}{player.Name}{suffix}: {msg}";
+                    var rewrittenMessage = $"{prefix}{colorCodedName}{suffix}: {msg}";
 
-                    SayToChat(rewrittenMessage, teamPlayer);
+                    Server.SayToChat(rewrittenMessage, teamPlayer);
                 }
                 return Task.FromResult(false);
         }

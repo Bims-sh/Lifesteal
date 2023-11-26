@@ -1,8 +1,8 @@
 using Lifesteal.API;
 
-namespace Lifesteal.Modules;
+namespace Lifesteal.Events;
 
-public class PlayerRoles : LifestealServer
+public class PlayerRoles : Event
 {
     public override Task OnPlayerConnected(LifestealPlayer player)
     {
