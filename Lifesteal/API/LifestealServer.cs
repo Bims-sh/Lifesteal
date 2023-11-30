@@ -14,6 +14,7 @@ public class LifestealServer : GameServer<LifestealPlayer>
         AddEvent(new LoadingScreenText(), this);
         AddEvent(new IllegalPlayerActions(), this);
         AddEvent(new ChatRewrite(), this);
+        AddEvent(new PlayerRoles(), this);
     }
 
     public void AddEvent(Event @event, LifestealServer server)
