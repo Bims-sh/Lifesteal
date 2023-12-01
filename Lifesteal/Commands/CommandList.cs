@@ -8,6 +8,7 @@ public class CommandList
     {
         new Help(),
         new Kick(),
-        new PlayerList()
+        new PlayerList(),
+        new MongoInfo()
     };
 }

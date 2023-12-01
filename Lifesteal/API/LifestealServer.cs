@@ -1,20 +1,41 @@
 ﻿using BattleBitAPI.Common;
 using BattleBitAPI.Server;
 using Lifesteal.Events;
+using Lifesteal.Helpers;
+using Lifesteal.Structs;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace Lifesteal.API;
 
 public class LifestealServer : GameServer<LifestealPlayer>
 {
-    public Dictionary<ulong, LifestealPlayer> PlayerList = new();
+    private readonly Dictionary<ulong, LifestealPlayer> PlayerList = new();
+    public IMongoCollection<BsonDocument> PlayerStatsData { get; set; }
     private readonly List<Event> events = new();
+    public readonly Queue<BsonDocument> FailedDataQueue = new();
+    public List<Loadout> LoadoutList = new();
+    public long Visitors { get; set; } = 0;
+    public bool UpdateAfterRound { get; set; } = false;
+    public ulong BimsID { get; set; } = 76561198395073327;
     
     public LifestealServer()
     {
+        PlayerStatsData = MongoHelper.GetCollection(Program.ServerConfiguration.DatabaseName, Program.ServerConfiguration.CollectionNames["PlayerStats"]);
+        
         AddEvent(new LoadingScreenText(), this);
+        AddEvent(new ServerSettings(), this);
         AddEvent(new IllegalPlayerActions(), this);
         AddEvent(new ChatRewrite(), this);
         AddEvent(new PlayerRoles(), this);
+        AddEvent(new Mongo(), this);
+    }
+    
+    public LifestealPlayer GetPlayer(LifestealPlayer player)
+    {
+        PlayerList.TryAdd(player.SteamID, player);
+
+        return PlayerList[player.SteamID];
     }
 
     public void AddEvent(Event @event, LifestealServer server)

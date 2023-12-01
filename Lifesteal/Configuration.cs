@@ -14,6 +14,12 @@ public class Configuration
         [Required] public int Port { get; set; } = 30001;
         [Required] public string LoadingScreenText { get; set; } = "Lifesteal Gungame";
         [Required] public LogLevel LogLevel { get; set; } = LogLevel.Players | LogLevel.GameServers | LogLevel.GameServerErrors | LogLevel.Sockets;
+        [Required] public string DatabaseName { get; set; } = "LifeStealGunGame";
+        [Required] public string MongoDBConnectionString { get; set; } = "mongodb://localhost:27017";
+        [Required] public Dictionary<string, string> CollectionNames { get; set; } = new()
+        {
+            { "PlayerStats", "PlayerStats" }
+        };
 
         [Required] public Dictionary<string, string> PlayerChatPrefixes { get; set; } = new()
         {

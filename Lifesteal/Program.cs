@@ -7,6 +7,7 @@ using System.Text.Json;
 using BattleBitAPI.Common;
 using BattleBitAPI.Server;
 using Lifesteal.API;
+using Lifesteal.Helpers;
 using Lifesteal.Util;
 using log4net;
 using log4net.Config;
@@ -34,7 +35,7 @@ internal class Program
         AllowTrailingCommas = true
     };
 
-    private void StartApi()
+    private async void StartApi()
     {
         try
         {
