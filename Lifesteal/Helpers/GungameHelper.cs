@@ -12,7 +12,7 @@ public class GungameHelper
         Program.Logger.Info($"Updated visitors, a total of {server.Visitors} visitors so far!");
     }
     
-    private static void GenerateLoadouts(LifestealServer server)
+    public static void GenerateLoadouts(LifestealServer server)
     {
         var weapons = Data.Items.WeaponList;
         var barrels = Data.Items.BarrelList;

@@ -13,7 +13,7 @@ public class PlayerList : ConsoleCommand
     {
         Action = args =>
         {
-            if (Server.AllPlayers.Count() == 0)
+            if (!Server.AllPlayers.Any())
             {
                 Logger.Info("No players online.");
                 return;

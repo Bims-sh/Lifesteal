@@ -9,6 +9,7 @@ public class CommandList
         new Help(),
         new Kick(),
         new PlayerList(),
+        new PlayerStats(),
         new MongoInfo()
     };
 }

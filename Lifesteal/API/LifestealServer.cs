@@ -5,6 +5,7 @@ using Lifesteal.Helpers;
 using Lifesteal.Structs;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using PlayerStats = BattleBitAPI.Common.PlayerStats;
 
 namespace Lifesteal.API;
 
@@ -29,6 +30,8 @@ public class LifestealServer : GameServer<LifestealPlayer>
         AddEvent(new ChatRewrite(), this);
         AddEvent(new PlayerRoles(), this);
         AddEvent(new Mongo(), this);
+        AddEvent(new Events.PlayerStats(), this);
+        AddEvent(new GungameCore(), this);
     }
     
     public LifestealPlayer GetPlayer(LifestealPlayer player)
