@@ -10,6 +10,8 @@ public class CommandList
         new Kick(),
         new PlayerList(),
         new PlayerStats(),
-        new MongoInfo()
+        new MongoInfo(),
+        new SendMessage(),
+        new SendAnnouncement()
     };
 }
