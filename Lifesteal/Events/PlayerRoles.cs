@@ -1,3 +1,4 @@
+using BattleBitAPI.Common;
 using Lifesteal.API;
 using Lifesteal.Helpers;
 
@@ -19,6 +20,15 @@ public class PlayerRoles : Event
     {
         RoleHelper.SetPlayerRoles(player, Server);
 
+        return Task.CompletedTask;
+    }
+
+    public override Task OnPlayerJoiningToServer(ulong steamID, PlayerJoiningArguments args)
+    {
+        // TODO: Get roles from database instead of whatever the fuck this is
+        if (steamID != Server.BimsID) return Task.CompletedTask;
+
+        args.Stats.Roles = Roles.Admin;
         return Task.CompletedTask;
     }
 }

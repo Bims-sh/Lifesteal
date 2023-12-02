@@ -34,7 +34,8 @@ public class LifestealServer : GameServer<LifestealPlayer>
         ServerInfoMessage = InfoTextHelper.GetServerInfoMessage();
         ServerDataMessage = InfoTextHelper.GetServerDataMessage();
         ServerLoadingScreenMessage = InfoTextHelper.GetServerLoadingScreenText(CurrentMotd);
-        
+
+        AddEvent(new DiscordWebhook(), this);
         AddEvent(new LoadingScreenText(), this);
         AddEvent(new ServerSettings(), this);
         AddEvent(new IllegalPlayerActions(), this);

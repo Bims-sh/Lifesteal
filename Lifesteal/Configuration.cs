@@ -12,8 +12,8 @@ public class Configuration
         [JsonIgnore] public IPAddress? IPAddress { get; set; }
         [Required] public string IP { get; set; } = "0.0.0.0";
         [Required] public int Port { get; set; } = 30001;
-        [Required] public string LoadingScreenText { get; set; } = "Lifesteal Gungame";
         [Required] public LogLevel LogLevel { get; set; } = LogLevel.Players | LogLevel.GameServers | LogLevel.GameServerErrors | LogLevel.Sockets;
+        [Required] public string DiscordWebhookURL { get; set; } = "";
         [Required] public string DatabaseName { get; set; } = "LifeStealGunGame";
         [Required] public string MongoDBConnectionString { get; set; } = "mongodb://localhost:27017";
         [Required] public Dictionary<string, string> CollectionNames { get; set; } = new()
