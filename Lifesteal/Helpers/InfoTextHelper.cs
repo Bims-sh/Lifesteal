@@ -38,9 +38,8 @@ public class InfoTextHelper
             .AppendLine($"{RichTextHelper.Bold(true)}{RichTextHelper.FromColorName("LightCoral")}{RichTextHelper.Size(30)}Made by{RichTextHelper.Color()} {RichTextHelper.FromColorName("LightSkyBlue")}@DasIschBims{RichTextHelper.Color()}")
             .AppendLine($"{RichTextHelper.Bold(true)}{RichTextHelper.FromColorName("White")}{RichTextHelper.Size(25)}Discord: {RichTextHelper.Color()}{RichTextHelper.FromColorName("MediumPurple")}https://dsc.gg/bblifesteal{RichTextHelper.Color()}")
             .AppendLine($"{RichTextHelper.Bold(true)}{RichTextHelper.FromColorName("White")}{RichTextHelper.Size(20)}Version: {RichTextHelper.Color()}{RichTextHelper.FromColorName("Gold")}1.3.0{RichTextHelper.Color()}")
-            .AppendLine($"{RichTextHelper.NewLine()}{RichTextHelper.Bold(true)}{RichTextHelper.FromColorName("Orange")}Type {RichTextHelper.FromColorName("Gold")}!help{RichTextHelper.FromColorName("Orange")} in chat to see all available commands{RichTextHelper.Color()}")
-            .AppendLine($"{RichTextHelper.NewLine()}")
-            .AppendLine($"{RichTextHelper.Bold(true)}{RichTextHelper.FromColorName("Gold")}{RichTextHelper.Size(20)}{currentMotd}{RichTextHelper.Color()}");
+            .AppendLine($"{RichTextHelper.Bold(true)}{RichTextHelper.FromColorName("Orange")}Type {RichTextHelper.FromColorName("Gold")}!help{RichTextHelper.FromColorName("Orange")} in chat to see all available commands{RichTextHelper.Color()}")
+            .AppendLine($"{RichTextHelper.NewLine()}{RichTextHelper.Bold(true)}{RichTextHelper.FromColorName("PaleVioletRed")}{RichTextHelper.Size(20)}{currentMotd}{RichTextHelper.Color()}");
         
         return loadingMessage.ToString();
     }

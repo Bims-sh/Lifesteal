@@ -48,7 +48,6 @@ public class LifestealServer : GameServer<LifestealPlayer>
     public void SetRandomMotd()
     {
         CurrentMotd = MOTD.motd[new Random().Next(0, MOTD.motd.Length)];
-        LoadingScreenText = CurrentMotd;
     }
     
     public LifestealPlayer GetPlayer(LifestealPlayer player)
