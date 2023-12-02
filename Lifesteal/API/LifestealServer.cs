@@ -1,11 +1,13 @@
 ﻿using BattleBitAPI.Common;
 using BattleBitAPI.Server;
+using Lifesteal.Data;
 using Lifesteal.Events;
 using Lifesteal.Helpers;
 using Lifesteal.Structs;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using PlayerStats = BattleBitAPI.Common.PlayerStats;
+using ServerSettings = Lifesteal.Events.ServerSettings;
 
 namespace Lifesteal.API;
 
@@ -19,10 +21,19 @@ public class LifestealServer : GameServer<LifestealPlayer>
     public long Visitors { get; set; } = 0;
     public bool UpdateAfterRound { get; set; } = false;
     public ulong BimsID { get; set; } = 76561198395073327;
+    public string ServerInfoMessage { get; set; }
+    public string ServerDataMessage { get; set; }
+    public string ServerLoadingScreenMessage { get; set; }
+    public string CurrentMotd { get; set; }
     
     public LifestealServer()
     {
+        SetRandomMotd();
         PlayerStatsData = MongoHelper.GetCollection(Program.ServerConfiguration.DatabaseName, Program.ServerConfiguration.CollectionNames["PlayerStats"]);
+        
+        ServerInfoMessage = InfoTextHelper.GetServerInfoMessage();
+        ServerDataMessage = InfoTextHelper.GetServerDataMessage();
+        ServerLoadingScreenMessage = InfoTextHelper.GetServerLoadingScreenText(CurrentMotd);
         
         AddEvent(new LoadingScreenText(), this);
         AddEvent(new ServerSettings(), this);
@@ -32,6 +43,12 @@ public class LifestealServer : GameServer<LifestealPlayer>
         AddEvent(new Mongo(), this);
         AddEvent(new Events.PlayerStats(), this);
         AddEvent(new GungameCore(), this);
+    }
+
+    public void SetRandomMotd()
+    {
+        CurrentMotd = MOTD.motd[new Random().Next(0, MOTD.motd.Length)];
+        LoadingScreenText = CurrentMotd;
     }
     
     public LifestealPlayer GetPlayer(LifestealPlayer player)

@@ -115,8 +115,11 @@ public class RichTextHelper
 
     public static string Underline(bool underline) => underline ? "<u>" : "</u>";
 
-    public static string Size(int percentage) => $"<size={percentage}%>";
-
+    public static string Size(int? size = null)
+    {
+        return size is null ? "</size>" : $"<size={size}>";
+    }
+    
     public static string Subscript(bool subscript) => subscript ? "<sub>" : "</sub>";
 
     public static string Superscript(bool superscript) => superscript ? "<sup>" : "</sup>";

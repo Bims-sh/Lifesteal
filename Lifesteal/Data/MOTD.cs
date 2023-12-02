@@ -1,0 +1,52 @@
+﻿namespace Lifesteal.Data;
+
+public class MOTD
+{
+    public static string[] motd =
+    {
+        "Get more info on the server by typing !help in the chat!",
+        "Hey guys, did you know that in terms of male human and female Pokémon breeding, Vaporeon is the most compatible Pokémon for humans?",
+        "Woo, gungame!",
+        "We're no strangers to love, you know the rules and so do I",
+        "This is a random loading screen message.",
+        "Take on me, take me on, I'll be gone, in a day or twoooo",
+        "Am I part of the loading screen?",
+        "Stay hydrated!",
+        "Stayin' alive, stayin' alive",
+        "I'm still standing, yeah yeah yeah",
+        "Never gonna give you up, never gonna let you down",
+        "Is this that one silly gungame server?",
+        "With the lights out, it's less dangerous",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque placerat.",
+        "Someone told me that Larry is still gate keeping the Maid Skin from us...",
+        "Hello this is your captain speaking, we are currently flying at an altitude of 42000 feet",
+        "What's the difference between a hippo and a zippo? One is really heavy, the other is a little lighter.",
+        "I'm not a big fan of archery. It has too many drawbacks.",
+        "I love thinking of those MOTDs",
+        "01110111 01101000 01111001 00101110 00100000 01101010 01110101 01110011 01110100 00100000 01110111 01101000 01111001 00101110",
+        "Tom and Jerry are the best",
+        "Dieser Text ist Deutsch!",
+        "You spin me right round, baby right round",
+        "Wow, you're actually reading these?",
+        "Are you still reading these? Hi!",
+        "Can I be in the loading screen too?",
+        "Hi mom, look I'm on TV!",
+        "What would happen if you hired two private investigators to follow each other?",
+        "You have now been burgered, you have to burger 5 people or you will be burgered forever",
+        "I'm a little teapot, short and stout",
+        "Have you considered C++?",
+        "Hello World! Wait, this isn't a programming language...",
+        "What if a christmas tree were to fall on you?",
+        "I'm also doing my part!",
+        "418: I'm a teapot... wait, what?",
+        "why. just why.",
+        "https://www.youtube.com/watch?v=JALbemLw3G4",
+        "I can see that you're still reading these, hi!",
+        "I filled my house with cardboard boxes, now I have a house of cards",
+        "If I had a dollar for every time I got distracted, I wish I had some ice cream",
+        "4C 61 72 72 79 2C 20 77 68 65 72 65 20 69 73 20 6D 79 20 6D 61 69 64 20 73 6B 69 6E 3F",
+        "Everyone praise our gracious lord, SgtOkiDoki",
+        "Don't you love people throwing flashbangs at you?",
+        "Do you know when you, umm... when you just... had something in your head... and then... you just... forgot it?"
+    };
+}

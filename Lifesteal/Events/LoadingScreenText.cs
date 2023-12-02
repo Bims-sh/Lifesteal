@@ -7,7 +7,24 @@ public class LoadingScreenText : Event
 {
     public override Task OnConnected()
     {
-        Server.LoadingScreenText = Program.ServerConfiguration.LoadingScreenText;
+        Server.SetRandomMotd();
+        Server.LoadingScreenText = Server.CurrentMotd;
+        
+        return Task.CompletedTask;
+    }
+
+    public override Task OnPlayerJoiningToServer(ulong steamID, PlayerJoiningArguments args)
+    {
+        Server.SetRandomMotd();
+        Server.LoadingScreenText = Server.CurrentMotd;
+        
+        return Task.CompletedTask;
+    }
+
+    public override Task OnPlayerConnected(LifestealPlayer player)
+    {
+        Server.SetRandomMotd();
+        Server.LoadingScreenText = Server.CurrentMotd;
         
         return Task.CompletedTask;
     }
