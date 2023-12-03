@@ -35,6 +35,7 @@ public class MOTD
         "What would happen if you hired two private investigators to follow each other?",
         "You have now been burgered, you have to burger 5 people or you will be burgered forever",
         "I'm a little teapot, short and stout",
+        "will do onlyfans if we go bankrupt and have to pay for AWS servers. - SgtOkiDoki",
         "Have you considered C++?",
         "so it's skill issue mostly ¯\\_(ツ)_/¯ - SgtOkiDoki",
         "Hello World! Wait, this isn't a programming language...",
