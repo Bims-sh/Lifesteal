@@ -50,15 +50,8 @@ public class LifestealServer : GameServer<LifestealPlayer>
     {
         CurrentMotd = MOTD.motd[new Random().Next(0, MOTD.motd.Length)];
     }
-    
-    public LifestealPlayer GetPlayer(LifestealPlayer player)
-    {
-        PlayerList.TryAdd(player.SteamID, player);
 
-        return PlayerList[player.SteamID];
-    }
-
-    public void AddEvent(Event @event, LifestealServer server)
+    private void AddEvent(Event @event, LifestealServer server)
     {
         @event.Server = server;
         

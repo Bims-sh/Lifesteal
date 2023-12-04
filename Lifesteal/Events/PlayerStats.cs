@@ -23,11 +23,11 @@ public class PlayerStats : Event
         {
             var killerFilter = Builders<BsonDocument>.Filter.Eq("SteamID", args.Killer.SteamID.ToString());
             var killerDocument = await Server.PlayerStatsData.Find(killerFilter).FirstOrDefaultAsync();
-            var killerPlayer = Server.GetPlayer(args.Killer);
+            var killerPlayer = args.Killer;
 
             var victimFilter = Builders<BsonDocument>.Filter.Eq("SteamID", args.Victim.SteamID.ToString());
             var victimDocument = await Server.PlayerStatsData.Find(victimFilter).FirstOrDefaultAsync();
-            var victimPlayer = Server.GetPlayer(args.Victim);
+            var victimPlayer = args.Victim;
 
             if (killerDocument == null)
             {

@@ -66,8 +66,7 @@ public class Mongo : Event
             var formattedBannedUntil = FormattingHelper.GetFormattedTime(bannedUntil);
             dbDocument["Banned"] = false;
             dbDocument["BannedUntil"] = formattedBannedUntil;
-            dbDocument["BanReason"] =
-                "Ban expired, you can now join the server again! If you can't join the server, contact @dasischbims on Discord!";
+            dbDocument["BanReason"] = "Ban expired, you can now join the server again! If you can't join the server, contact @dasischbims on Discord!";
 
             Task.Run(() => MongoHelper.UpdateDataAsync(Server.PlayerStatsData, dbDocument, Server));
         }
@@ -76,8 +75,7 @@ public class Mongo : Event
         {
             dbDocument["Name"] = player.Name;
             var hudEnabled = dbDocument["HudEnabled"].AsBoolean;
-            var playerConfig = Server.GetPlayer(player);
-            playerConfig.HasHudEnabled = hudEnabled;
+            player.HasHudEnabled = hudEnabled;
 
             Task.Run(() => MongoHelper.UpdateDataAsync(Server.PlayerStatsData, dbDocument, Server));
         }

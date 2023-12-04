@@ -1,7 +1,6 @@
 ﻿using Lifesteal.API;
-using Lifesteal.Types;
 
-namespace Lifesteal.Commands;
+namespace Lifesteal.ConsoleCommands;
 
 public class PlayerList : ConsoleCommand
 {

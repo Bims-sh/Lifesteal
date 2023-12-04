@@ -49,6 +49,10 @@ public class ChatRewrite : Event
                     Server.SayToChat(rewrittenMessage, teamPlayer);
                 }
                 return Task.FromResult(false);
+            case ChatChannel.SquadChat:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(channel), channel, null);
         }
         
         return Task.FromResult(true);

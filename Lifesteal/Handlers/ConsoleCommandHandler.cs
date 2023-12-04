@@ -1,8 +1,6 @@
-﻿using Lifesteal.API;
-using Lifesteal.Commands;
-using Lifesteal.Types;
+﻿using Lifesteal.ConsoleCommands;
 
-namespace Lifesteal.Util;
+namespace Lifesteal.Handlers;
 
 public class ConsoleCommandHandler
 {

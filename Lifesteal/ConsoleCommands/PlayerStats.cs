@@ -1,10 +1,8 @@
-﻿using System.Text;
-using Lifesteal.API;
-using Lifesteal.Types;
+﻿using Lifesteal.API;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace Lifesteal.Commands;
+namespace Lifesteal.ConsoleCommands;
 
 public class PlayerStats : ConsoleCommand
 {

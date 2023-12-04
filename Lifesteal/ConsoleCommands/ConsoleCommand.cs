@@ -1,8 +1,7 @@
-﻿using BattleBitAPI.Server;
-using Lifesteal.API;
+﻿using Lifesteal.API;
 using log4net;
 
-namespace Lifesteal.Types;
+namespace Lifesteal.ConsoleCommands;
 
 public class ConsoleCommand : Attribute
 {

@@ -1,7 +1,6 @@
 ﻿using Lifesteal.Helpers;
-using Lifesteal.Types;
 
-namespace Lifesteal.Commands;
+namespace Lifesteal.ConsoleCommands;
     
 public class SendAnnouncement : ConsoleCommand
 {
