@@ -25,6 +25,8 @@ public class LifestealServer : GameServer<LifestealPlayer>
     public string ServerDataMessage { get; set; }
     public string ServerLoadingScreenMessage { get; set; }
     public string CurrentMotd { get; set; }
+    public int KillsPerLevel { get; set; } = 1;
+    public bool RoundWon { get; set; } = false;
     
     public LifestealServer()
     {
