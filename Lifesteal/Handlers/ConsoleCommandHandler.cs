@@ -26,7 +26,7 @@ public class ConsoleCommandHandler
             
             string commandName = commandParts[0];
             
-            ConsoleCommand? consoleCommand = CommandList.Commands.FirstOrDefault(c => c.Name == commandName);
+            ConsoleCommand? consoleCommand = ConsoleCommandList.Commands.FirstOrDefault(c => c.Name == commandName);
             if (consoleCommand == null)
             {
                 Program.Logger.Error($"Command {commandName} not found.");

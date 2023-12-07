@@ -1,6 +1,6 @@
 ﻿namespace Lifesteal.ConsoleCommands;
 
-public class CommandList
+public class ConsoleCommandList
 {
     public static List<ConsoleCommand> Commands { get; } = new()
     {

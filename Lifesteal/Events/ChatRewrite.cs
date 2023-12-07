@@ -9,7 +9,8 @@ public class ChatRewrite : Event
 {
     public override Task<bool> OnPlayerTypedMessage(LifestealPlayer player, ChatChannel channel, string msg)
     {
-        if (msg.StartsWith("!")) return Task.FromResult(false);
+        var commandPrefix = Program.ServerConfiguration.ChatCommandPrefix ?? "!";
+        if (msg.StartsWith(commandPrefix)) return Task.FromResult(false);
 
         Enums.PlayerRoles highestRole = player.GetHighestRole();
         var prefix = player.GetPrefixForHighestRole(highestRole);

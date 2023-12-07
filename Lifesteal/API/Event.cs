@@ -3,7 +3,6 @@ using BattleBitAPI.Server;
 
 namespace Lifesteal.API;
 
-// pass in the server instance to the event so we can access the server's properties
 public class Event
 {
     public LifestealServer Server { get; set; }

@@ -10,7 +10,7 @@ public class Help : ConsoleCommand
         Action = args =>
         {
             Logger.Info("Available commands:");
-            foreach (var command in CommandList.Commands)
+            foreach (var command in ConsoleCommandList.Commands)
             {
                 string usage = command.Usage == "" ? "" : $"(Usage: {command.Usage})";
                 Logger.Info($"| {command} {usage}"); 
