@@ -46,6 +46,7 @@ public class LifestealServer : GameServer<LifestealPlayer>
         AddEvent(new Mongo(), this);
         AddEvent(new Events.PlayerStats(), this);
         AddEvent(new GungameCore(), this);
+        AddEvent(new ChatCommandListener(), this);
     }
 
     public void SetRandomMotd()
@@ -100,11 +101,7 @@ public class LifestealServer : GameServer<LifestealPlayer>
 
     public override async Task<bool> OnPlayerTypedMessage(LifestealPlayer player, ChatChannel channel, string msg)
     {
-        foreach (var @event in events)
-            if (!await @event.OnPlayerTypedMessage(player, channel, msg))
-                return false;
-
-        return true;
+        return await RunEventWithBoolReturn(@event => @event.OnPlayerTypedMessage(player, channel, msg));
     }
 
     public override async Task OnPlayerJoiningToServer(ulong steamID, PlayerJoiningArguments args)
@@ -121,20 +118,12 @@ public class LifestealServer : GameServer<LifestealPlayer>
 
     public override async Task<bool> OnPlayerRequestingToChangeRole(LifestealPlayer player, GameRole requestedRole)
     {
-        foreach (var @event in events)
-            if (!await @event.OnPlayerRequestingToChangeRole(player, requestedRole))
-                return false;
-
-        return true;
+        return await RunEventWithBoolReturn(@event => @event.OnPlayerRequestingToChangeRole(player, requestedRole));
     }
 
     public override async Task<bool> OnPlayerRequestingToChangeTeam(LifestealPlayer player, Team requestedTeam)
     {
-        foreach (var @event in events)
-            if (!await @event.OnPlayerRequestingToChangeTeam(player, requestedTeam))
-                return false;
-
-        return true;
+        return await RunEventWithBoolReturn(@event => @event.OnPlayerRequestingToChangeTeam(player, requestedTeam));
     }
 
     public override async Task OnPlayerChangedRole(LifestealPlayer player, GameRole role)
@@ -175,10 +164,8 @@ public class LifestealServer : GameServer<LifestealPlayer>
     
     public override async Task<OnPlayerSpawnArguments?> OnPlayerSpawning(LifestealPlayer player, OnPlayerSpawnArguments request)
     {
-        foreach (var @event in events)
-            await @event.OnPlayerSpawning(player, request);
-
-        return request;
+        var returnRequest = await RunEventWithOnPlayerSpawnArgumentsReturn((@event, oldRequest) => @event.OnPlayerSpawning(player, oldRequest), request);
+        return returnRequest;
     }
     
     public override async Task OnPlayerSpawned(LifestealPlayer player)
@@ -239,5 +226,40 @@ public class LifestealServer : GameServer<LifestealPlayer>
     {
         foreach (var @event in events)
             await @event.OnSessionChanged(oldSessionID, newSessionID);
+    }
+    
+    private async Task<bool> RunEventWithBoolReturn(Func<Event, Task<bool>> func)
+    {
+        bool returnValue = true;
+        
+        foreach (var @event in events)
+        {
+            if (!await func(@event))
+            {
+                returnValue = false;
+            }
+        }
+        
+        return returnValue;
+    }
+    
+    private async Task<OnPlayerSpawnArguments?> RunEventWithOnPlayerSpawnArgumentsReturn(Func<Event, OnPlayerSpawnArguments, Task<OnPlayerSpawnArguments?>> func, OnPlayerSpawnArguments request)
+    {
+        OnPlayerSpawnArguments? returnRequest = request;
+        OnPlayerSpawnArguments oldRequest = request;
+        
+        foreach (var @event in events)
+        {
+            var returnResult = await func(@event, oldRequest);
+            if (returnRequest != null)
+                oldRequest = returnRequest.Value;
+            
+            if (returnRequest != null && returnResult != null)
+                returnRequest = returnResult.Value;
+            else
+                returnRequest = null;
+        }
+        
+        return returnRequest;
     }
 }
