@@ -23,12 +23,12 @@ public class ChatCommandHandler
         try
         {
             command.Action?.Invoke(args.Skip(1).ToArray(), player);
-            Program.Logger.Info($"Command {commandName} with args {string.Join(" ", args.Skip(1).ToArray())} executed by \"{player.Name}\""); 
+            Program.Logger.Info($"Command {commandName} with args \"{string.Join(" ", args.Skip(1).ToArray())}\" executed by \"{player.Name}\""); 
         }
         catch (Exception e)
         {
-            player.Message($"An error occurred while executing command {commandName}");
-            Program.Logger.Error($"An error occurred while executing command {commandName} with args {string.Join(" ", args.Skip(1).ToArray())} by \"{player.Name}\"");
+            player.Message($"An error occurred while executing command \"{commandName}\"");
+            Program.Logger.Error($"An error occurred while executing command \"{commandName}\" with args \"{string.Join(" ", args.Skip(1).ToArray())}\" by \"{player.Name}\"", e);
             return Task.FromResult(false);
         }
         
@@ -37,6 +37,13 @@ public class ChatCommandHandler
 
     private static ChatCommand? GetCommandFromName(string name)
     {
-        return ChatCommandList.Commands.FirstOrDefault(command => command.Name == name);
+        ChatCommand? command = ChatCommandList.Commands.FirstOrDefault(c => c.Name == name);
+        if (command != null) return command;
+        
+        command = ChatCommandList.AdminCommands.FirstOrDefault(c => c.Name == name);
+        if (command != null) return command;
+        
+        command = ChatCommandList.ModeratorCommands.FirstOrDefault(c => c.Name == name);
+        return command ?? null;
     }
 }

@@ -9,7 +9,7 @@ public class MessageHelper
         server.SayToAllChat($"[{RichTextHelper.Bold(true)}{RichTextHelper.FromColorName("Green")}Server{RichTextHelper.Color()}{RichTextHelper.Bold(false)}]: {message}");
     }
     
-    public static void ConsoleToAnnouncement(string message, string length, LifestealServer server)
+    public static void ToAnnouncement(string message, string length, LifestealServer server)
     {
         switch (length)
         {
@@ -23,5 +23,10 @@ public class MessageHelper
                 Program.Logger.Error("Invalid length given in server announcement.");
                 break;
         }
+    }
+    
+    public static void ConsoleToChat(string message)
+    {
+        Program.Server.SayToAllChat($"[{RichTextHelper.Bold(true)}{RichTextHelper.FromColorName("Green")}Server{RichTextHelper.Color()}{RichTextHelper.Bold(false)}]: {message}");
     }
 }

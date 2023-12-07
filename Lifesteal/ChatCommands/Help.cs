@@ -13,9 +13,9 @@ public class Help : ChatCommand
             List<ChatCommand> displayedCommands = new();
             
             // add admin, moderator, and regular commands
-            if (player.PlayerRoles.Any(role => role == PlayerRoles.Admin))
+            if (player.PlayerRoles.Any(role => role >= PlayerRoles.Admin))
                 displayedCommands.AddRange(ChatCommandList.AdminCommands);
-            if (player.PlayerRoles.Any(role => role == PlayerRoles.Moderator))
+            if (player.PlayerRoles.Any(role => role >= PlayerRoles.Moderator))
                 displayedCommands.AddRange(ChatCommandList.ModeratorCommands);
             displayedCommands.AddRange(ChatCommandList.Commands);
             

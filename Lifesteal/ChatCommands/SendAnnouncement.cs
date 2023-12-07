@@ -1,8 +1,8 @@
 ﻿using Lifesteal.Helpers;
 
-namespace Lifesteal.ConsoleCommands;
-    
-public class SendAnnouncement : ConsoleCommand
+namespace Lifesteal.ChatCommands;
+
+public class SendAnnouncement : ChatCommand
 {
     public SendAnnouncement() : base(
         name: "an",
@@ -10,18 +10,24 @@ public class SendAnnouncement : ConsoleCommand
         usage: "an [l/s] <message>"
     )
     {
-        Action = args =>
+        Action = (args, player) =>
         {
+            if (!CanExecute(player))
+            {
+                player.Message("You do not have permission to execute this command.");
+                return;
+            }
+            
             if (args.Length < 1)
             {
-                Logger.Error("You must provide a message.");
+                player.Message($"Invalid arguments. Usage: {Usage}");
                 return;
             }
             
             string length = args[0];
             if (length != "s" && length != "l")
             {
-                Logger.Error("You must provide a valid length.");
+                player.Message("Invalid length. Must be either \"s\" or \"l\".");
                 return;
             }
             
