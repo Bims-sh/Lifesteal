@@ -9,7 +9,7 @@ public class ScoreboardHelper
     {
         var top5 = server.AllPlayers.OrderByDescending(p => p.Kills).Take(5).ToList();
         var separator = new string('-', 35);
-        var header = $"{RichTextHelper.Bold(true)}{RichTextHelper.FromColorName("LawnGreen")}{RichTextHelper.Sprite("Veteran")} Top 5 Players {RichTextHelper.Sprite("Veteran")}";
+        var header = $"{RichTextHelper.Bold(true)}{RichTextHelper.FromColorName("LawnGreen")}{RichTextHelper.Sprite("Veteran")} Top 5 Players {RichTextHelper.Sprite("Veteran")}{RichTextHelper.NewLine()}";
         
         var top5Score = new StringBuilder();
         foreach (var topPlayer in top5)
@@ -36,10 +36,10 @@ public class ScoreboardHelper
             playerScore.AppendLine($"{RichTextHelper.Bold(true)}{RichTextHelper.FromColorName("LightGoldenrodYellow")}{separator}{RichTextHelper.FromColorName("LightGoldenrodYellow")}");
 
             // add next weapon
-            if (nextPlayerWeapon == string.Empty)
+            if (nextPlayerWeapon != string.Empty)
                 playerScore.AppendLine($"{RichTextHelper.Bold(true)}{RichTextHelper.FromColorName("Aquamarine")}Next Weapon: {nextPlayerWeapon}{RichTextHelper.Color()}");
             else
-                playerScore.AppendLine($"{RichTextHelper.Bold(true)}{RichTextHelper.FromColorName("Aquamarine")}Winner winner chicken dinner!{RichTextHelper.Color()}");
+                playerScore.AppendLine($"{RichTextHelper.Bold(true)}{RichTextHelper.FromColorName("Aquamarine")}You win!{RichTextHelper.Color()}");
             
             // add kills per level if it's more than 1
             if (server.KillsPerLevel > 1)

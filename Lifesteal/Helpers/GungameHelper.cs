@@ -5,13 +5,7 @@ using Lifesteal.Structs;
 namespace Lifesteal.Helpers;
 
 public class GungameHelper
-{
-    public static async void UpdateVisitors(LifestealServer server)
-    {
-        server.Visitors = await server.PlayerStatsData.EstimatedDocumentCountAsync();
-        Program.Logger.Info($"Updated visitors, a total of {server.Visitors} visitors so far!");
-    }
-    
+{    
     public static void GenerateLoadouts(LifestealServer server)
     {
         var weapons = Data.Items.WeaponList;
@@ -29,9 +23,9 @@ public class GungameHelper
             var loadout = new Loadout();
 
             loadout.PrimaryWeapon = weapon.Name;
-            loadout.PrimaryWeaponBarrel = random.Next(0, 100) < 69 ? null : ListHelper.GetRandomItem(barrels, random).Name;
+            loadout.PrimaryWeaponBarrel = random.Next(0, 100) < 69 ? null : ListHelper.GetRandomItem(barrels).Name;
             loadout.PrimaryWeaponUnderBarrel =
-                random.Next(0, 100) < 69 ? null : ListHelper.GetRandomItem(underBarrels, random).Name;
+                random.Next(0, 100) < 69 ? null : ListHelper.GetRandomItem(underBarrels).Name;
             if (weapon.WeaponType == WeaponType.SniperRifle)
             {
                 loadout.PrimaryWeaponSight = Attachments.Echo.Name;
@@ -40,7 +34,7 @@ public class GungameHelper
             }
             else
             {
-                loadout.PrimaryWeaponSight = ListHelper.GetRandomItem(sights, random).Name;
+                loadout.PrimaryWeaponSight = ListHelper.GetRandomItem(sights).Name;
             }
 
             loadouts.Add(loadout);
@@ -69,21 +63,5 @@ public class GungameHelper
         }
 
         server.LoadoutList = loadouts;
-    }
-    
-    public static void StopServer(LifestealServer server)
-    {
-        foreach (var player in server.AllPlayers)
-        {
-            player.Kick("Server is restarting, please rejoin in a few minutes!");
-        }
-
-        server.ExecuteCommand("stop");
-
-        var process = System.Diagnostics.Process.GetProcessesByName("BattleBit");
-        if (process.Length > 0)
-        {
-            process[0].Kill();
-        }
     }
 }
