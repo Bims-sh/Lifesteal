@@ -50,7 +50,7 @@ public class Items
         Weapons.MP5,
         Weapons.MP7,
         Weapons.PP19,
-        Weapons.L96,
+        Weapons.UMP45,
         Weapons.Ultimax100,
         Weapons.MG36,
         Weapons.Glock18,
@@ -60,7 +60,6 @@ public class Items
     public static readonly List<Gadget> GadgetList = new()
     {
         Gadgets.Rpg7HeatExplosive,
-        Gadgets.SledgeHammerSkinC,
         Gadgets.PickaxeIronPickaxe,
         Gadgets.SuicideC4
     };

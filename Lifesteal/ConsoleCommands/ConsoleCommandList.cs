@@ -7,8 +7,6 @@ public class ConsoleCommandList
         new Help(),
         new Kick(),
         new PlayerList(),
-        new PlayerStats(),
-        new MongoInfo(),
         new SendMessage(),
         new SendAnnouncement()
     };
