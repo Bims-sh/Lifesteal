@@ -27,6 +27,8 @@ public class GungameCore : Event
 
     public override Task OnPlayerConnected(LifestealPlayer player)
     {
+        player.ResetPlayer();
+        
         ScoreboardHelper.UpdateScoreboard(Server);
 
         Server.KillsPerLevel = Server.AllPlayers.Count() switch
@@ -43,6 +45,8 @@ public class GungameCore : Event
 
     public override Task OnPlayerDisconnected(LifestealPlayer player)
     {
+        player.ResetPlayer();
+        
         ScoreboardHelper.UpdateScoreboard(Server);
         
         Server.UILogOnServer($"Player {player.Name} disconnected", 3);
@@ -141,11 +145,7 @@ public class GungameCore : Event
             
             foreach (var player in Server.AllPlayers)
             {
-                player.Level = 0;
-                player.Kills = 0;
-                player.Deaths = 0;
-                player.HasKillStreak = false;
-                player.KillsOnCurrentStreak = 0;
+                player.ResetPlayer();
             }
         }
         

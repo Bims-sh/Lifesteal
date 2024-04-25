@@ -84,4 +84,13 @@ public class LifestealPlayer : Player<LifestealPlayer>
         if (lightGadgetName != null)
             SetLightGadget(lightGadgetName, lightGadgetExtra, true);
     }
+
+    public void ResetPlayer()
+    {
+        Kills = 0;
+        Deaths = 0;
+        Level = 0;
+        KillsOnCurrentStreak = 0;
+        HasKillStreak = false;
+    }
 }
