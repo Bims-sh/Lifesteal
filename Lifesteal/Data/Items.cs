@@ -60,7 +60,6 @@ public class Items
     public static readonly List<Gadget> GadgetList = new()
     {
         Gadgets.Rpg7HeatExplosive,
-        Gadgets.SledgeHammerSkinC,
         Gadgets.PickaxeIronPickaxe,
         Gadgets.SuicideC4
     };

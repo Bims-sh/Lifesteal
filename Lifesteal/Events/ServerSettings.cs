@@ -36,7 +36,6 @@ public class ServerSettings : Event
                 case GameState.WaitingForPlayers:
                     break;
                 case GameState.CountingDown:
-                    Server.RoundSettings.SecondsLeft = 15;
                     break;
                 case GameState.EndingGame:
                     break;

@@ -18,6 +18,7 @@ public class GungameCore : Event
 
     public override Task OnSessionChanged(long oldSessionID, long newSessionID)
     {
+        Server.RoundWon = false;
         ListHelper.ShuffleList(Server.LoadoutList);
         GungameHelper.GenerateLoadouts(Server);
         
@@ -78,7 +79,7 @@ public class GungameCore : Event
 
     public override Task<OnPlayerSpawnArguments?> OnPlayerSpawning(LifestealPlayer player, OnPlayerSpawnArguments request)
     {
-        var loadout = Server.LoadoutList[player.Kills];
+        var loadout = Server.LoadoutList[player.Level];
         player.UpdateLoadout(loadout);
 
         request.Loadout.FirstAid = default;
@@ -137,6 +138,15 @@ public class GungameCore : Event
             var topList = top5.Select(topPlayer => new EndGamePlayer<LifestealPlayer>(topPlayer, topPlayer.Kills)).ToList();
             
             Server.ForceEndGame(topList);
+            
+            foreach (var player in Server.AllPlayers)
+            {
+                player.Level = 0;
+                player.Kills = 0;
+                player.Deaths = 0;
+                player.HasKillStreak = false;
+                player.KillsOnCurrentStreak = 0;
+            }
         }
         
         if (killer.KillsOnCurrentStreak % 3 == 0)
