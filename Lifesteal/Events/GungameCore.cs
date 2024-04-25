@@ -31,7 +31,7 @@ public class GungameCore : Event
 
         Server.KillsPerLevel = Server.AllPlayers.Count() switch
         {
-            <= 16 => 1,
+            <= 24 => 1,
             <= 32 => 2,
             _ => 3
         };

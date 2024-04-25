@@ -34,6 +34,7 @@ public class ServerSettings : Event
                     Server.RoundSettings.SecondsLeft = 45297;
                     break;
                 case GameState.WaitingForPlayers:
+                    Server.ForceStartGame();
                     break;
                 case GameState.CountingDown:
                     break;
